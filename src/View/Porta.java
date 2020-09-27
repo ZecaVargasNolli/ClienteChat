@@ -6,6 +6,10 @@
 package View;
 
 import Singleton.Singleton;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,7 +18,7 @@ import Singleton.Singleton;
 public class Porta extends javax.swing.JFrame {
 
     
-    private MenuPrincipal menu = new MenuPrincipal();
+    private MenuPrincipal menu ;
     /**
      * Creates new form Porta
      */
@@ -78,7 +82,13 @@ public class Porta extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String porta = jTextField1.getText();
+        try {
+            Singleton.getInstance().getUsu().setIpAtual(InetAddress.getLocalHost().getHostAddress());
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Singleton.getInstance().getUsu().setPortaAtual(Integer.parseInt(porta));
+        menu = new MenuPrincipal();
         menu.setLocationRelativeTo(null);
         menu.setResizable(false);
         menu.setVisible(true);

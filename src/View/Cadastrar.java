@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.ControllerIntegracaoServidor;
 import Model.Usuario;
 import Singleton.Singleton;
 import javax.swing.JOptionPane;
@@ -130,16 +131,29 @@ public class Cadastrar extends javax.swing.JFrame {
         String Email = jTextField2.getText();
         String Senha = jTextField3.getText();
         String AnoNascimento = jTextField4.getText();
+        
         Usuario usu = new Usuario();
+        
+        usu.setApelido(Apelido);
+        usu.setEmail(Email);
+        usu.setSenha(Senha);
+        usu.setAnoNascimento(Integer.parseInt(AnoNascimento));
+        
         Singleton.getInstance().setUsu(usu);
         
-        if(true) {
+        ControllerIntegracaoServidor servidor = new ControllerIntegracaoServidor(Singleton.getInstance().getUsu(), Singleton.getInstance().getIpServidor());
+        
+        if(servidor.requestInsereUsuario().isOk()) {
             JOptionPane.showMessageDialog(rootPane, "Usuário inserido com sucesso!");
+            this.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(rootPane, "Não foi possível efetuar o cadastro!");
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+            jTextField4.setText("");
         }
         
-        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

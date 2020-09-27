@@ -5,12 +5,15 @@
  */
 package View;
 
+import Controller.ControllerIntegracaoServidor;
+import Desenhar.Online;
 import Model.Usuario;
 import Singleton.Singleton;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -120,20 +123,27 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String email = jTextField2.getText();
-        String senha = jPasswordField1.getSelectedText();
+        String senha = jPasswordField1.getText();
         Usuario usu  =  new Usuario();
         usu.setSenha(senha);
         usu.setEmail(email);
-        try {
-            usu.setIpAtual(InetAddress.getLocalHost().getHostAddress());
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         Singleton.getInstance().setUsu(usu);
-        pod.setLocationRelativeTo(null);
-        pod.setResizable(false);
-        pod.setVisible(true);
-        this.setVisible(false);
+        ControllerIntegracaoServidor servidor = new ControllerIntegracaoServidor(Singleton.getInstance().getUsu(), Singleton.getInstance().getIpServidor());
+        Usuario retorno =  servidor.requestAutenticaUsuario();
+        if(retorno.getId() == -1) {
+            jTextField2.setText("");
+            jPasswordField1.setText("");
+            JOptionPane.showMessageDialog(rootPane, "Credenciais Invalídas");
+        } else {
+            Singleton.getInstance().setUsu(retorno);
+            pod.setLocationRelativeTo(null);
+            pod.setResizable(false);
+            pod.setVisible(true);
+            Online on = new Online();
+            on.start();
+            this.setVisible(false);
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
