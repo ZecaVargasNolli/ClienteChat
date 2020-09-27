@@ -39,6 +39,7 @@ public class PreencherTabela extends Thread {
             List<String[]> lista = new ArrayList<>();
             ControllerIntegracaoServidor servidor = new ControllerIntegracaoServidor(Singleton.getInstance().getUsu(), Singleton.getInstance().getIpServidor());
             List<Usuario> usuario = servidor.requestConsultaContatosOnline().getListaUsu();
+            Singleton.getInstance().setUsus(usuario);
             for (int i = 0; i < usuario.size(); i++) {
                 lista.add(new String[]{usuario.get(i).getApelido() + "(" + usuario.get(i).getId() + ")"});
             }

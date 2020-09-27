@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.RunnableRecebeClieteRequest;
 import Singleton.Singleton;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -88,6 +89,8 @@ public class Porta extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         Singleton.getInstance().getUsu().setPortaAtual(Integer.parseInt(porta));
+        Thread ex = new Thread(new RunnableRecebeClieteRequest(Integer.parseInt(porta)));
+        ex.start();
         menu = new MenuPrincipal();
         menu.setLocationRelativeTo(null);
         menu.setResizable(false);

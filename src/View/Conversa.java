@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.ControllerIntegracaoCliente;
 import Desenhar.PrintarConversar;
 import Model.ConversaTexto;
 import Model.Texto;
@@ -36,11 +37,6 @@ public class Conversa extends javax.swing.JFrame {
         this.id = id;
         initComponents();
         jTextArea1.setEditable(false);
-        texto = new ConversaTexto();
-        Usuario usu = new Usuario();
-        usu.setId(id);
-        texto.setUsuarioConversando(usu);
-        Singleton.getInstance().addConversa(texto);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         print = new PrintarConversar(jTextArea1, true, id);
         print.start();
@@ -117,6 +113,8 @@ public class Conversa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ControllerIntegracaoCliente cliente = new ControllerIntegracaoCliente(Singleton.getInstance().getConversaUsuario(id).getIpAtual(), Singleton.getInstance().getConversaUsuario(id).getPortaAtual(), Singleton.getInstance().getUsu());
+        cliente.enviaMsgTexto(jTextArea2.getText());
         Singleton.getInstance().getConversaCorreta(id).adicionarMensagem(new Texto(Singleton.getInstance().getUsu().getApelido(), jTextArea2.getText()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
