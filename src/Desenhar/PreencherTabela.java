@@ -46,7 +46,7 @@ public class PreencherTabela extends Thread {
             DefaultTableModel model = new DefaultTableModel(lista.toArray(new String[lista.size()][]), nomesColunas);
             table.setModel(model);
             try {
-                this.sleep(15000);
+                this.sleep(5000);
             } catch (InterruptedException ex) {
             }
         }

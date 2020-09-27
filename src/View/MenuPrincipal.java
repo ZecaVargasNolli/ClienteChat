@@ -128,9 +128,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        int i = jTable1.getSelectedColumn();
-        int j = jTable1.getSelectedRow();
-        String valores =  (String) jTable1.getValueAt(i, j);
+        String valores =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), jTable1.getSelectedColumn());
         char[] chars = valores.toCharArray();
         Conversa conversa =  new Conversa(Integer.parseInt(chars[chars.length - 2] + ""));
         conversa.setLocationRelativeTo(null);
