@@ -5,8 +5,10 @@
  */
 package Singleton;
 
+import Model.ConversaTexto;
 import Model.Usuario;
 import java.util.ArrayList;
+import java.util.List;
 import jdk.nashorn.internal.codegen.CompilerConstants;
 
 /**
@@ -17,7 +19,8 @@ public class Singleton {
     
     private static Singleton Instance;
     private Usuario usu;
-    private ArrayList<Usuario> usus =   new ArrayList<>();
+    private List<Usuario> usus =   new ArrayList<>();
+    private ArrayList<ConversaTexto> conversa = new ArrayList<>();
     private String ipServidor;
 
     public Singleton() {
@@ -39,11 +42,11 @@ public class Singleton {
         this.usu = usu;
     }
 
-    public ArrayList<Usuario> getUsus() {
+    public List<Usuario> getUsus() {
         return usus;
     }
 
-    public void setUsus(ArrayList<Usuario> usus) {
+    public void setUsus(List<Usuario> usus) {
         this.usus = usus;
     }
     
@@ -58,6 +61,39 @@ public class Singleton {
     public void setIpServidor(String ipServidor) {
         this.ipServidor = ipServidor;
     }
+
+    public ArrayList<ConversaTexto> getConversa() {
+        return conversa;
+    }
+
+    public void setConversa(ArrayList<ConversaTexto> conversa) {
+        this.conversa = conversa;
+    }
     
+    public void addConversa(ConversaTexto conversa) {
+        this.conversa.add(conversa);
+    }
     
+    public Usuario getConversaUsuario(int id) {
+        for(Usuario usu: this.usus) {
+            if(usu.getId() == id) {
+                return usu;
+            }
+        }
+        return null;
+    }
+    
+    public ConversaTexto getConversaCorreta(int idContato) {
+        for (ConversaTexto conversa : this.conversa) {
+            if(conversa.getUsuarioConversando().getId() == idContato) {
+                return conversa;
+            }
+        }
+        ConversaTexto nova = new ConversaTexto();
+        Usuario usu = new Usuario();
+        usu.setId(idContato);
+        nova.setUsuarioConversando(usu);
+        Singleton.getInstance().addConversa(nova);
+        return nova;
+    } 
 }
