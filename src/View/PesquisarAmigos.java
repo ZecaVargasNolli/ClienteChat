@@ -114,7 +114,7 @@ public class PesquisarAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String valores =  (String) jTable1.getValueAt(jTable1.getSelectedColumn(), jTable1.getSelectedRow());
+        String valores =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), jTable1.getSelectedColumn());
         char[] chars = valores.toCharArray();
         ControllerIntegracaoServidor servidor = new ControllerIntegracaoServidor(Singleton.getInstance().getUsu(), Singleton.getInstance().getIpServidor());
         Usuario usuarioRemover = new Usuario();

@@ -5,7 +5,6 @@
  */
 package Desenhar;
 
-import Model.ClienteReguest;
 import Model.ClienteRequest;
 import Model.Texto;
 import Singleton.Singleton;
