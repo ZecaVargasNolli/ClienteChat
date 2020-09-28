@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Cliente.jnlp">
+  <information>
+    <title>Cliente</title>
+    <vendor>José Vargas Nolli</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Cliente.jar" size="65700" download="eager" />
+    <jar href="lib\gson-2.8.6.jar" size="240255" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="cliente.Cliente"  name="Cliente" />
+  <update check="always"/>
+</jnlp>
